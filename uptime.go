@@ -39,16 +39,13 @@ func getUptime() string {
 	return fmt.Sprintf(" %d:%02d:%02d up %d:%02d, power on %d:%02d:%02d,", tim.Hour(), tim.Minute(), tim.Second(), hours, minutes, onHour, onMinute, onSecond)
 }
 
-func secondsToTime(seconds int) (int, int, int) {
-	second := seconds % 60
-	seconds = (seconds - second) / 60
+func secondsToTime(time int) (int, int, int) {
+	seconds := time % 60
+	totalMinute := (time - seconds) / 60
+	minutes := totalMinute % 60
+	hours := (totalMinute - minutes) / 60
 
-	minutes := seconds % 60
-	seconds = (seconds - minutes) / 60
-
-	hours := seconds / 60
-
-	return hours, minutes, second
+	return hours, minutes, seconds
 }
 
 //Read file: /proc/loadavg
